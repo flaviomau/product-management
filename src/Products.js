@@ -1,19 +1,22 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 
 import ProductsHome from './ProductsHome'
+import Category from './Category'
 
-class Products extends Component{
+class Products extends Component{    
     render(){
+        const { match } = this.props
         return (
             <div className='row'>
                 <div className='col-md-2'>
                     <h3>Category</h3>
-                    LINK TO CATEGORY
+                    <Link to='products/category/1'>Category 1</Link>
                 </div>
-                <div className='col-md-10'>
+                <div className='col-md-10'>                    
                     <h1>Products</h1>
-                    <Route exact path={this.props.match.url} component={ProductsHome}/>
+                    <Route exact path={match.url} component={ProductsHome}/>
+                    <Route exact path={match.url+'/category/:catId'} component={Category}/>
                 </div>
             </div>
         )
