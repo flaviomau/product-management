@@ -4,6 +4,7 @@ import 'bootstrap-css-only'
 
 import Home from './Home'
 import About from './About'
+import Products from './Products'
 
 
 class App extends Component {
@@ -19,7 +20,7 @@ class App extends Component {
                 <Link className="nav-link" to='/'>Home</Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/">Products</a>
+                  <Link className="nav-link" to="/products">Products</Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to='about'>About</Link>
@@ -29,6 +30,7 @@ class App extends Component {
           </nav>
           <div className='container'>
             <Route exact path='/' component={Home}/>
+            <Route path='/products' component={Products}/>
             <Route exact path='/about' component={About}/>
           </div>
         </div>
