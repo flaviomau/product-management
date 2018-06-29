@@ -5,6 +5,7 @@ import icons from 'glyphicons'
 
 import ProductsHome from './ProductsHome'
 import Category from './Category'
+import Api from './Api'
 
 class Products extends Component{
     constructor(props){
@@ -18,19 +19,19 @@ class Products extends Component{
     }
 
     loadCategories(){
-        axios.get('http://localhost:3001/categories')
-            .then(res => {
-                this.setState({
-                    categories: res.data
-                })
+        Api.loadCategories()
+        .then(res => {
+            this.setState({
+                categories: res.data
             })
+        })
     }
     componentDidMount(){
         this.loadCategories()
     }
 
     removeCategory(cat){
-        axios.delete('http://localhost:3001/categories/' + cat.id)
+        Api.removeCategories(cat.id)
         .then(res => {
             this.loadCategories()
         })
