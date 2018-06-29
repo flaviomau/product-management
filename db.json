@@ -1,44 +1,44 @@
 {
-    "products":[
-        {
-            "id": 1,
-            "description": "Soap",
-            "category": 1
-        },
-        {
-            "id": 2,
-            "description": "Softener",
-            "category": 1
-        },
-        {
-            "id": 3,
-            "description": "Detergent",
-            "category": 1
-        },
-        {
-            "id": 4,
-            "description": "Rice",
-            "category": 2
-        },
-        {
-            "id": 5,
-            "description": "Bean",
-            "category": 2
-        },
-        {
-            "id": 6,
-            "description": "Pasta",
-            "category": 2
-        }
-    ],
-    "categories":[
-        {
-            "id": 1,
-            "description": "Cleaning"
-        },
-        {
-            "id": 2,
-            "description": "Food"
-        }
-    ]
+  "products": [
+    {
+      "id": 1,
+      "description": "Soap",
+      "category": 1
+    },
+    {
+      "id": 2,
+      "description": "Softener",
+      "category": 1
+    },
+    {
+      "id": 3,
+      "description": "Detergent",
+      "category": 1
+    },
+    {
+      "id": 4,
+      "description": "Rice",
+      "category": 2
+    },
+    {
+      "id": 5,
+      "description": "Bean",
+      "category": 2
+    },
+    {
+      "id": 6,
+      "description": "Pasta",
+      "category": 2
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "description": "Cleaning"
+    },
+    {
+      "id": 2,
+      "description": "Food"
+    }
+  ]
 }

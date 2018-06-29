@@ -8,18 +8,23 @@ import Category from './Category'
 class Products extends Component{
     constructor(props){
         super(props)
+        this.handleNewCategory = this.handleNewCategory.bind(this)
+        this.loadCategories = this.loadCategories.bind(this)
         this.state = {
             categories: []
         }
     }
 
-    componentDidMount(){
+    loadCategories(){
         axios.get('http://localhost:3001/categories')
             .then(res => {
                 this.setState({
                     categories: res.data
                 })
             })
+    }
+    componentDidMount(){
+        this.loadCategories()
     }
 
     renderCategory(cat){
@@ -28,6 +33,17 @@ class Products extends Component{
                 <Link to={`/products/category/${cat.id}`}>{cat.description}</Link>
             </li>
         )
+    }
+
+    handleNewCategory(key){
+        if(key.keyCode === 13){
+            axios.post('http://localhost:3001/categories', {
+                description: this.refs.category.value
+            }).then(res => {
+                this.refs.category.value = ''
+                this.loadCategories()                
+            })
+        }
     }
 
     render(){
@@ -40,6 +56,9 @@ class Products extends Component{
                     <ul>
                         {categories.map(this.renderCategory)}
                     </ul>
+                    <div className='card card-body bg-light'>
+                        <input type='text' ref='category' placeholder='New category' onKeyUp={this.handleNewCategory}/>
+                    </div>
                 </div>
                 <div className='col-md-10'>                    
                     <h1>Products</h1>
