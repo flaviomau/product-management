@@ -8,6 +8,40 @@ import Products from './Products'
 
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      categories: []
+    }
+
+    this.loadCategories = this.loadCategories.bind(this)
+    this.removeCategory = this.removeCategory.bind(this)
+    this.createCategory = this.createCategory.bind(this)
+  }
+
+  loadCategories(){
+    this.props.Api.loadCategories()
+    .then(res => {
+      this.setState({
+        categories: res.data
+      })
+    })
+  }
+
+  removeCategory(cat){
+    this.props.Api.removeCategory(cat.id)
+    .then(res => {
+      this.loadCategories()
+    })
+  }
+
+  createCategory(cat){
+    this.props.Api.createCategory(cat)
+    .then(res => {
+      this.loadCategories()
+    })
+  }
+
   render() {
     return (
       <Router>
@@ -30,7 +64,19 @@ class App extends Component {
           </nav>
           <div className='container'>
             <Route exact path='/' component={Home}/>
-            <Route path='/products' component={Products}/>
+            <Route path='/products' render={ (props) => {
+                  return (
+                    <Products 
+                      {...props} 
+                      loadCategories={this.loadCategories}
+                      removeCategory={this.removeCategory}
+                      createCategory={this.createCategory}
+                      categories={this.state.categories}                      
+                    />
+                  )
+                }
+              }
+            />
             <Route exact path='/about' component={About}/>
           </div>
         </div>
