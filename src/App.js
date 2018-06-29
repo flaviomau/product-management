@@ -52,10 +52,7 @@ class App extends Component {
   }
 
   createProduct(prod){
-    this.props.Api.createProduct(prod)
-    //.then(res => {
-    //  this.loadCategories()
-    //})
+    return this.props.Api.createProduct(prod)
   }
 
   render() {
