@@ -24,8 +24,8 @@ class Products extends Component{
 
     renderCategory(cat){
         return (
-            <li key={cat}>
-                <Link to={`/products/category/${cat.id}`}>{cat.category}</Link>
+            <li key={cat.id}>
+                <Link to={`/products/category/${cat.id}`}>{cat.description}</Link>
             </li>
         )
     }
