@@ -11,7 +11,9 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      categories: []
+      categories: [],
+      products: [],
+      category: null
     }
 
     this.loadCategories = this.loadCategories.bind(this)
@@ -19,6 +21,8 @@ class App extends Component {
     this.createCategory = this.createCategory.bind(this)
     this.editCategory = this.editCategory.bind(this)
     this.createProduct = this.createProduct.bind(this)
+    this.loadProducts = this.loadProducts.bind(this)
+    this.loadCategory = this.loadCategory.bind(this)
   }
 
   loadCategories(){
@@ -55,6 +59,24 @@ class App extends Component {
     return this.props.Api.createProduct(prod)
   }
 
+  loadProducts(prod){
+    this.props.Api.loadProducts(prod)
+    .then(res => {
+      this.setState({
+        products: res.data
+      })
+    })
+  }
+
+  loadCategory(cat){
+    this.props.Api.loadCategory(cat)
+    .then(res => {
+      this.setState({
+        category: res.data
+      })
+    })
+  }
+
   render() {
     return (
       <Router>
@@ -87,6 +109,10 @@ class App extends Component {
                       editCategory={this.editCategory}
                       categories={this.state.categories}
                       createProduct={this.createProduct}
+                      loadProducts={this.loadProducts}
+                      loadCategory={this.loadCategory}
+                      products={this.state.products}
+                      category={this.state.category}
                     />
                   )
                 }

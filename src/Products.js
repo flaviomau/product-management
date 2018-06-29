@@ -91,7 +91,7 @@ class Products extends Component{
     }
 
     render(){
-        const { match, categories, createProduct } = this.props        
+        const { match, categories, createProduct, loadProducts, products, loadCategory, category } = this.props        
         return (            
             <div className='row'>            
                 <div className='col-md-2'>
@@ -116,10 +116,18 @@ class Products extends Component{
                         return <ProductsNew 
                             {...props}
                             categories={categories}
-                            createProduct={createProduct}
+                            createProduct={createProduct}                            
                         />
                     }}/>
-                    <Route exact path={match.url+'/category/:catId'} component={Category}/>
+                    <Route exact path={match.url+'/category/:catId'} render={(props)=>{
+                        return <Category 
+                            {...props}
+                            loadProducts={loadProducts}
+                            loadCategory={loadCategory}
+                            products={products}
+                            category={category}
+                        />
+                    }}/>
                 </div>
             </div>
         )

@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import axios from 'axios'
 
 class Category extends Component{
     constructor(props){
@@ -8,7 +7,7 @@ class Category extends Component{
         this.state = {
             products: [],
             category: {}
-        }        
+        }
     }
 
     componentDidMount(){
@@ -21,22 +20,19 @@ class Category extends Component{
         this.loadData(id)
     }
 
-    loadData(id){
-        axios
-            .get('http://localhost:3001/products?category=' + id)
-            .then(res => {
+    loadData(id){    
+        this.props.loadProducts(id)
+            /*.then(res => {
                 this.setState({
                     products: res.data
                 })
-            })
-
-        axios
-            .get('http://localhost:3001/categories/' + id)
-            .then(res => {
+            })*/
+        this.props.loadCategory(id)
+            /*.then(res => {
                 this.setState({
                     category: res.data
                 })
-            })
+            })*/
     }
 
     renderProduct(product){
@@ -49,7 +45,7 @@ class Category extends Component{
         return (
             <div>
                 <h1>{this.state.category.description}</h1>
-                {this.state.products.map(this.renderProduct)}
+                {this.props.products.map(this.renderProduct)}
             </div>            
         )
     }
