@@ -18,6 +18,7 @@ class App extends Component {
     this.removeCategory = this.removeCategory.bind(this)
     this.createCategory = this.createCategory.bind(this)
     this.editCategory = this.editCategory.bind(this)
+    this.createProduct = this.createProduct.bind(this)
   }
 
   loadCategories(){
@@ -48,6 +49,13 @@ class App extends Component {
     .then(res => {
       this.loadCategories()
     })
+  }
+
+  createProduct(prod){
+    this.props.Api.createProduct(prod)
+    //.then(res => {
+    //  this.loadCategories()
+    //})
   }
 
   render() {
@@ -81,6 +89,7 @@ class App extends Component {
                       createCategory={this.createCategory}
                       editCategory={this.editCategory}
                       categories={this.state.categories}
+                      createProduct={this.createProduct}
                     />
                   )
                 }

@@ -29,6 +29,16 @@
       "id": 6,
       "description": "Pasta",
       "category": 2
+    },
+    {
+      "description": "Wisk",
+      "category": "3",
+      "id": 7
+    },
+    {
+      "description": "Coca Cola",
+      "category": "3",
+      "id": 8
     }
   ],
   "categories": [

@@ -3,6 +3,7 @@ import { Route, Link } from 'react-router-dom'
 import icons from 'glyphicons'
 
 import ProductsHome from './ProductsHome'
+import ProductsNew from './ProductsNew'
 import Category from './Category'
 
 
@@ -90,7 +91,7 @@ class Products extends Component{
     }
 
     render(){
-        const { match, categories } = this.props        
+        const { match, categories, createProduct } = this.props        
         return (            
             <div className='row'>            
                 <div className='col-md-2'>
@@ -99,12 +100,25 @@ class Products extends Component{
                         {categories.map(this.renderCategory)}
                     </ul>
                     <div className='card card-sm card-body bg-light'>
-                        <input className = 'form-control' type='text' ref='category' placeholder='New category' onKeyUp={this.handleNewCategory}/>
-                    </div>                    
+                        <input className = 'form-control' 
+                            type='text' 
+                            ref='category' 
+                            placeholder='New category' 
+                            onKeyUp={this.handleNewCategory}
+                        />
+                    </div>
+                    <Link to='/products/new'>New product</Link>                    
                 </div>
                 <div className='col-md-10'>                    
                     <h1>Products</h1>   
                     <Route exact path={match.url} component={ProductsHome}/>
+                    <Route exact path={match.url+'/new'} render={(props) => {
+                        return <ProductsNew 
+                            {...props}
+                            categories={categories}
+                            createProduct={createProduct}
+                        />
+                    }}/>
                     <Route exact path={match.url+'/category/:catId'} component={Category}/>
                 </div>
             </div>

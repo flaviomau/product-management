@@ -8,7 +8,8 @@ const apis = {
     loadCategories: () => host.get('categories'),
     removeCategory: (id) => host.delete('categories/' + id),
     createCategory: (category) => host.post('categories', category),
-    editCategory: (category) => host.put('categories/' + category.id, category)
+    editCategory: (category) => host.put('categories/' + category.id, category),
+    createProduct: (product) => host.post('products', product),
 }
 
 export default apis
