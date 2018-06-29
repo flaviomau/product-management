@@ -39,6 +39,14 @@
     {
       "id": 2,
       "description": "Food"
+    },
+    {
+      "id": 3,
+      "description": "Drinks"
+    },
+    {
+      "id": 4,
+      "description": "Utility"
     }
   ]
 }

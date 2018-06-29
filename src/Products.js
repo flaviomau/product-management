@@ -9,8 +9,16 @@ import Category from './Category'
 class Products extends Component{
     constructor(props){
         super(props)
+
+        this.state = {
+            editingCategory: ''
+        }
+
         this.handleNewCategory = this.handleNewCategory.bind(this)
-        this.renderCategory = this.renderCategory.bind(this)        
+        this.handleEditCategory = this.handleEditCategory.bind(this)
+        this.renderCategory = this.renderCategory.bind(this)
+        this.doEditCategory = this.doEditCategory.bind(this)
+        this.cancelEditCategory = this.cancelEditCategory.bind(this)
     }
 
     
@@ -18,15 +26,58 @@ class Products extends Component{
         this.props.loadCategories()
     }
 
+    doEditCategory(cat){
+        this.setState({
+            editingCategory: cat.id
+        })
+    }
+
+    cancelEditCategory(cat){
+        this.setState({
+            editingCategory: ''
+        })
+    }
+
     renderCategory(cat){
         return (
             <li key={cat.id}>
-                <Link to={`/products/category/${cat.id}`}>{cat.description}</Link>&nbsp;
-                <button className='btn btn-sm' onClick={()=>this.props.removeCategory(cat)}>
-                    {icons.cancel}
-                </button>
+                {
+                    this.state.editingCategory === cat.id &&
+                    <div className='input-group'>
+                        <div className='input-group-append' >
+                            <input type='text' ref={'cat-'+cat.id} className='form-control' defaultValue={cat.description} onKeyUp={this.handleEditCategory} />
+                            <button className='btn' onClick = {()=> this.cancelEditCategory()}>
+                                {icons.noEntry}
+                            </button>
+                        </div>                        
+                    </div>
+                }
+                {
+                    this.state.editingCategory !== cat.id &&
+                    <div>                        
+                        <button className='btn btn-sm btn-info' style={{margin: 5}} onClick={()=>this.doEditCategory(cat)}>
+                            {icons.pencil}
+                        </button>
+                        <button className='btn btn-sm btn-danger' style={{margin: 5}} onClick={()=>this.props.removeCategory(cat)}>
+                            {icons.cancel}
+                        </button>
+                        <Link to={`/products/category/${cat.id}`}>{cat.description}</Link>&nbsp;
+                    </div>
+                }
             </li>
         )
+    }
+
+    handleEditCategory(key){
+        if(key.keyCode === 13){
+            this.props.editCategory({
+                id: this.state.editingCategory,
+                description: this.refs['cat-' + this.state.editingCategory].value
+            })
+            this.setState({
+                editingCategory: ''
+            })
+        }        
     }
 
     handleNewCategory(key){
@@ -44,7 +95,7 @@ class Products extends Component{
             <div className='row'>            
                 <div className='col-md-2'>
                     <h3>Category</h3>
-                    <ul>
+                    <ul style={{listStyle: 'none', padding: 0}}>
                         {categories.map(this.renderCategory)}
                     </ul>
                     <div className='card card-sm card-body bg-light'>
