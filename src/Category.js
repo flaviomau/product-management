@@ -6,7 +6,8 @@ class Category extends Component{
         this.loadData = this.loadData.bind(this)
         this.state = {
             products: [],
-            category: {}
+            category: {},
+            id: null
         }
     }
 
@@ -16,23 +17,15 @@ class Category extends Component{
     }
 
     componentWillReceiveProps(newProps){
-        const id = newProps.match.params.catId
-        this.loadData(id)
+        if(newProps.match.params.catId !== this.state.id){
+            this.loadData(newProps.match.params.catId)
+        }            
     }
 
-    loadData(id){    
+    loadData(id){
+        this.setState({ id })
         this.props.loadProducts(id)
-            /*.then(res => {
-                this.setState({
-                    products: res.data
-                })
-            })*/
         this.props.loadCategory(id)
-            /*.then(res => {
-                this.setState({
-                    category: res.data
-                })
-            })*/
     }
 
     renderProduct(product){
@@ -44,7 +37,7 @@ class Category extends Component{
     render(){
         return (
             <div>
-                <h1>{this.state.category.description}</h1>
+                <h1>{this.props.category && this.props.category.description}</h1>
                 {this.props.products.map(this.renderProduct)}
             </div>            
         )
