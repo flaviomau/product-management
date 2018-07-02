@@ -9,10 +9,12 @@ const apis = {
     removeCategory: (id) => host.delete('categories/' + id),
     createCategory: (category) => host.post('categories', category),
     editCategory: (category) => host.put('categories/' + category.id, category),
+    loadCategory: (id) => host.get('categories/' + id),
     createProduct: (product) => host.post('products', product),
     loadProducts: (id) => host.get('products?category=' + id),
     removeProduct: (id) => host.delete('products/' + id),
-    loadCategory: (id) => host.get('categories/' + id)
+    readProduct: (id) => host.get('products/' + id),
+    editProduct: (product) => host.put('products/' + product.id, product)
 }
 
 export default apis

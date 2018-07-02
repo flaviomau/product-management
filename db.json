@@ -39,6 +39,11 @@
       "description": "Coca Cola",
       "category": "3",
       "id": 13
+    },
+    {
+      "id": 15,
+      "description": "Broom",
+      "category": "4"
     }
   ],
   "categories": [

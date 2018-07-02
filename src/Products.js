@@ -4,6 +4,7 @@ import icons from 'glyphicons'
 
 import ProductsHome from './ProductsHome'
 import ProductsNew from './ProductsNew'
+import ProductEdit from './ProductEdit'
 import Category from './Category'
 
 
@@ -117,6 +118,14 @@ class Products extends Component{
                             {...props}
                             categories={categories}
                             createProduct={createProduct}                            
+                        />
+                    }}/>
+                    <Route path={match.url+'/edit/:id'} render={(props) => {
+                        return <ProductEdit 
+                            {...props}
+                            categories={categories}
+                            readProduct={this.props.readProduct}
+                            editProduct={this.props.editProduct}
                         />
                     }}/>
                     <Route exact path={match.url+'/category/:catId'} render={(props)=>{

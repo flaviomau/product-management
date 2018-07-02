@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import icons from 'glyphicons'
+import { Link } from 'react-router-dom';
 
 class Category extends Component{
     constructor(props){
@@ -34,11 +35,13 @@ class Category extends Component{
         return(
             <div className="card" key={product.id} style={{ margin: 15 }}>
                 <div className="card-header text-right">
-                    <button className='btn btn-sm btn-danger' onClick={() => {
-                        this.props.removeProduct(product).then(res => {
-                            this.loadData(this.props.match.params.catId)
-                        })
-                    }}>
+                    <Link to={'/products/edit/' + product.id} style={{margin: 5}}>Edit</Link>
+                    <button className='btn btn-sm btn-danger' 
+                        onClick={() => {
+                            this.props.removeProduct(product).then(res => {
+                                this.loadData(this.props.match.params.catId)
+                            })
+                        }}>
                         {icons.cancel}
                     </button>
                 </div>
