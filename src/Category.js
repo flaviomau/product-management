@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
+import icons from 'glyphicons'
 
 class Category extends Component{
     constructor(props){
         super(props)
         this.loadData = this.loadData.bind(this)
+        this.renderProduct = this.renderProduct.bind(this)
         this.state = {
             products: [],
             category: {},
@@ -30,7 +32,20 @@ class Category extends Component{
 
     renderProduct(product){
         return(
-            <p className='card card-body bg-light' key={product.id}>{product.description}</p>
+            <div className="card" key={product.id} style={{ margin: 15 }}>
+                <div className="card-header text-right">
+                    <button className='btn btn-sm btn-danger' onClick={() => {
+                        this.props.removeProduct(product).then(res => {
+                            this.loadData(this.props.match.params.catId)
+                        })
+                    }}>
+                        {icons.cancel}
+                    </button>
+                </div>
+                <div className="card-body">
+                    {product.description}
+                </div>
+            </div>
         )
     }
 
@@ -38,6 +53,9 @@ class Category extends Component{
         return (
             <div>
                 <h1>{this.props.category && this.props.category.description}</h1>
+                {
+                    this.props.products.length === 0 && <p className='alert alert-info'>No products in database...</p>
+                }
                 {this.props.products.map(this.renderProduct)}
             </div>            
         )

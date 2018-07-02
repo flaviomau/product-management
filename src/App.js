@@ -20,9 +20,10 @@ class App extends Component {
     this.removeCategory = this.removeCategory.bind(this)
     this.createCategory = this.createCategory.bind(this)
     this.editCategory = this.editCategory.bind(this)
+    this.loadCategory = this.loadCategory.bind(this)
     this.createProduct = this.createProduct.bind(this)
     this.loadProducts = this.loadProducts.bind(this)
-    this.loadCategory = this.loadCategory.bind(this)
+    this.removeProduct = this.removeProduct.bind(this)    
   }
 
   loadCategories(){
@@ -77,6 +78,10 @@ class App extends Component {
     })
   }
 
+  removeProduct(prod){
+    return this.props.Api.removeProduct(prod.id)    
+  }
+
   render() {
     return (
       <Router>
@@ -102,17 +107,18 @@ class App extends Component {
             <Route path='/products' render={ (props) => {
                   return (
                     <Products 
-                      {...props} 
+                      {...props}
                       loadCategories={this.loadCategories}
                       removeCategory={this.removeCategory}
                       createCategory={this.createCategory}
                       editCategory={this.editCategory}
-                      categories={this.state.categories}
+                      loadCategory={this.loadCategory}
                       createProduct={this.createProduct}
                       loadProducts={this.loadProducts}
-                      loadCategory={this.loadCategory}
+                      removeProduct={this.removeProduct}
+                      categories={this.state.categories}                                                                
                       products={this.state.products}
-                      category={this.state.category}
+                      category={this.state.category}                      
                     />
                   )
                 }

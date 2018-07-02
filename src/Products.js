@@ -91,7 +91,7 @@ class Products extends Component{
     }
 
     render(){
-        const { match, categories, createProduct, loadProducts, products, loadCategory, category } = this.props        
+        const { match, categories, products, category, createProduct, loadProducts, removeProduct, loadCategory } = this.props        
         return (            
             <div className='row'>            
                 <div className='col-md-2'>
@@ -124,6 +124,7 @@ class Products extends Component{
                             {...props}
                             loadProducts={loadProducts}
                             loadCategory={loadCategory}
+                            removeProduct={removeProduct}
                             products={products}
                             category={category}
                         />

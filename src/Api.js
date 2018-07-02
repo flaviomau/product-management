@@ -11,6 +11,7 @@ const apis = {
     editCategory: (category) => host.put('categories/' + category.id, category),
     createProduct: (product) => host.post('products', product),
     loadProducts: (id) => host.get('products?category=' + id),
+    removeProduct: (id) => host.delete('products/' + id),
     loadCategory: (id) => host.get('categories/' + id)
 }
 
